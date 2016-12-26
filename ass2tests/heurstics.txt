@@ -1,0 +1,9 @@
+We choose the following heuristics:
+1. for the zero sum game, calculate the distance of both player from goal
+   if current player's distance is higher than other player's return -1,
+   if they're equal return 0 otherwise 1.
+
+2. for the semi coop game, calculate the distance of both player from goal
+   and return a vector of both distances.
+3. for the semi coop game, calculate the distance of both player from goal
+   and return the sum of both distances.
