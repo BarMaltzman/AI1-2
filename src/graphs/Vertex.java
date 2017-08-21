@@ -1,6 +1,8 @@
 package graphs;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 
 
 public class Vertex {
@@ -10,6 +12,7 @@ public class Vertex {
 	private ArrayList <Key> keys;
 	//private ArrayList <Agent> agents;
 	private ArrayList <Vertex> neighbors;
+	private Map <Integer,Double> keysProbs;
 	
 	public Vertex(int id){
 		this.setLocks(new ArrayList<Lock>());
@@ -152,6 +155,14 @@ public class Vertex {
 		}
 		
 		return false;
+	}
+
+	public void addKeyProbability(int keyId, double probability) {
+		keysProbs.put(keyId, probability);
+	}
+	public double getKeyProbability(int keyId)
+	{
+		return (keysProbs.containsKey(keyId) ? keysProbs.get(keyId) : 0);
 	}
 
 }

@@ -22,9 +22,8 @@ import normalAgents.GreedyAgentKeyCollector;
 import normalAgents.HumanAgent;
 
 
-public class Simulator {
+public class Simulator3 {
 	private static Graph graph;
-
 	public static void main(String[] args) {
 		initGraph();
 		List<Graph> graphs = new ArrayList<Graph>();
@@ -79,7 +78,7 @@ public class Simulator {
 						graph.addAgent(new AStarSearchAgent(1,new DisjakstraHeuristic(),otherAgent),startingVertex,goalVertex);
 						break;
 					case 3:
-						graph.addAgent(new RealTimeAStarSearchAgent(1,new DisjakstraHeuristic(),1,otherAgent),startingVertex,goalVertex);
+						graph.addAgent(new RealTimeAStarSearchAgent(1,new DisjakstraHeuristic(),2,otherAgent),startingVertex,goalVertex);
 						break;
 				}
 				break;
@@ -116,10 +115,11 @@ public class Simulator {
 
 	private static void initGraph() {
 		int numberOfVertex = 0;
+		double pbrc;
+		int numberOfBlockaids;
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter File Name:");
 		String filename = scanner.nextLine();
-
 		File file = new File(filename);
 		BufferedReader reader = null;
 		try {
@@ -138,13 +138,11 @@ public class Simulator {
 					else {
 						int currVertexId = Integer.parseInt(splits[1]);
 						int keyId = Integer.parseInt(splits[3]);
-						String keyName = null;
-						if(splits.length > 4)
-							keyName = splits[4];
-						if(splits[2].equals("K"))
-							graph.addKeyToVertex(currVertexId,new Key(keyId,keyName));
-						else
-							graph.addLockToVertex(currVertexId,new Lock(keyId,keyName));
+						double probability = Double.parseDouble(splits[4]);
+			           graph.getVertixes().get(currVertexId).addKeyProbability(keyId,probability);
+						
+						break; // notice, we do not add the keys yet, because they might not even exist.
+						
 					}
 					break;
 				case "#E":
@@ -153,7 +151,12 @@ public class Simulator {
 					double weight = Double.parseDouble(splits[3].substring(1));
 					graph.addEdge(v1num,v2num,weight);
 					break;
-
+				case "#PBRC":
+					pbrc = Double.parseDouble(splits[1]);
+					break;
+				case "#B":
+					numberOfBlockaids = Integer.parseInt(splits[1]);
+					
 				}
 			}	
 		}

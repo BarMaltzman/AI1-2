@@ -1,0 +1,18 @@
+#V 5    ; number of vertices n in graph (from 1 to n)
+
+#B 1          ; Number of different blockage IDs ([1] in this case)
+
+#V 3 K 1 0.4  ; Vertex 3, probability of key (resource) ID 1 is  0.4
+#V 4 B 1 0.2  ; Vertex 4, probability of blockage ID 1 is  0.2
+
+etc.
+
+#E 1 2 W3   ; Edge from vertex 1 to vertex 2, weight 3
+#E 2 3 W2   ; Edge from vertex 2 to vertex 3, weight 2
+#E 3 4 W3   ; Edge from vertex 3 to vertex 4, weight 3
+#E 4 5 W1   ; Edge from vertex 4 to vertex 5, weight 1
+#E 2 4 W4   ; Edge from vertex 2 to vertex 4, weight 4
+#E 1 5 W100 ; Edge from vertex 1 to vertex 4, weight 100
+
+#Start 1
+#Goal 5
